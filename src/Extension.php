@@ -20,6 +20,7 @@ class Extension extends AbstractExtension
      */
     public function boot()
     {
+        $this->loadViewsFrom(realpath(__DIR__ . '/../resources/views'), 'sitemap');
     }
 
     /**
