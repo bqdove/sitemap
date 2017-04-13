@@ -8,7 +8,13 @@
  */
 namespace Notadd\Sitemap;
 
+use Illuminate\Events\Dispatcher;
+use Notadd\Content\Models\Article;
 use Notadd\Foundation\Extension\Abstracts\Extension as AbstractExtension;
+use Notadd\Foundation\Http\Events\RequestHandled;
+use Notadd\Foundation\Setting\Contracts\SettingsRepository;
+use Notadd\Sitemap\Listeners\CsrfTokenRegister;
+use Notadd\Sitemap\Listeners\RouteRegister;
 
 /**
  * Class Extension.
@@ -21,6 +27,25 @@ class Extension extends AbstractExtension
     public function boot()
     {
         $this->loadViewsFrom(realpath(__DIR__ . '/../resources/views'), 'sitemap');
+        $this->app->make(Dispatcher::class)->listen(RequestHandled::class, function () {
+            if ($this->app->isInstalled()) {
+                $setting = $this->app->make(SettingsRepository::class);
+                if ($setting->get('sitemap.recently', true)) {
+                    $list = (new Article())->newQuery()->orderBy('created_at', 'desc')->take(1000)->get();
+                } else {
+                    $list = (new Article())->newQuery()->orderBy('created_at', 'desc')->get();
+                }
+                $sitemap = $this->app->make('sitemap');
+                $list->each(function (Article $article) use ($sitemap) {
+                    $sitemap->add($this->app->make('url')->to('article/' . $article->getAttribute('id')),
+                        $article->getAttribute('updated_at'), 0.8, 'daily', [], $article->getAttribute('title'));
+                });
+                $setting->get('sitemap.xml', true) && $sitemap->store('xml', 'sitemap');
+                $setting->get('sitemap.html', true) && $sitemap->store('html', 'sitemap');
+            }
+        });
+        $this->app->make(Dispatcher::class)->subscribe(CsrfTokenRegister::class);
+        $this->app->make(Dispatcher::class)->subscribe(RouteRegister::class);
     }
 
     /**
@@ -53,6 +78,21 @@ class Extension extends AbstractExtension
     public static function name()
     {
         return 'notadd/sitemap';
+    }
+
+    /**
+     * Register extension extra providers.
+     */
+    public function register()
+    {
+        $this->app->singleton('sitemap', function () {
+            return new Sitemap($this->app, [
+                'use_cache'      => false,
+                'cache_key'      => 'notadd_sitemap',
+                'cache_duration' => 3600,
+                'escaping'       => true,
+            ]);
+        });
     }
 
     /**
