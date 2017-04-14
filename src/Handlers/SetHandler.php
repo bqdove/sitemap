@@ -65,10 +65,11 @@ class SetHandler extends AbstractSetHandler
      */
     public function execute()
     {
-        $this->settings->set('sitemap.xml', $this->request->input('xml'));
-        $this->settings->set('sitemap.html', $this->request->input('html'));
         $this->settings->set('sitemap.cycle', $this->request->input('cycle'));
+        $this->settings->set('sitemap.enabled', $this->request->input('enabled'));
+        $this->settings->set('sitemap.html', $this->request->input('html'));
         $this->settings->set('sitemap.recently', $this->request->input('recently'));
+        $this->settings->set('sitemap.xml', $this->request->input('xml'));
 
         return true;
     }

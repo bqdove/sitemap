@@ -10,6 +10,7 @@
                     injection.loading.finish();
                     injection.sidebar.active('setting');
                     vm.form.cycle = data.cycle === '1';
+                    vm.form.enabled = data.enabled === '1';
                     vm.form.html = data.html === '1';
                     vm.form.recently = data.recently === '1';
                     vm.form.xml = data.xml === '1';
@@ -20,6 +21,7 @@
             return {
                 form: {
                     cycle: false,
+                    enabled: false,
                     html: false,
                     recently: false,
                     xml: false,
@@ -46,6 +48,16 @@
     <card>
         <p slot="title">网站地图</p>
         <i-form :label-width="200" :model="form">
+            <row>
+                <i-col span="14">
+                    <form-item label="功能开启" prop="enabled">
+                        <i-switch v-model="form.enabled" size="large">
+                            <span slot="open">开启</span>
+                            <span slot="close">关闭</span>
+                        </i-switch>
+                    </form-item>
+                </i-col>
+            </row>
             <row>
                 <i-col span="14">
                     <form-item label="生成 XML 地图" prop="xml">
