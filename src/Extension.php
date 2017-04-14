@@ -60,7 +60,7 @@ class Extension extends AbstractExtension
      */
     public static function description()
     {
-        return 'Extension for sitemap.';
+        return '网站地图的生成和管理。';
     }
 
     /**
@@ -82,7 +82,7 @@ class Extension extends AbstractExtension
      */
     public static function name()
     {
-        return 'notadd/sitemap';
+        return '网站地图';
     }
 
     /**
