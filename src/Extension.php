@@ -101,6 +101,17 @@ class Extension extends AbstractExtension
     }
 
     /**
+     * Get script of extension.
+     *
+     * @return string
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public static function script()
+    {
+        return asset('assets/extensions/sitemap/js/extension.min.js');
+    }
+
+    /**
      * Uninstall for extension.
      *
      * @return \Closure
