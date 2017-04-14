@@ -1,3 +1,3 @@
-const instance = {};
+import injection from './helpers/injection';
 
-export default instance;
+export default injection;
