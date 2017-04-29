@@ -49,7 +49,7 @@
         <p slot="title">网站地图</p>
         <i-form :label-width="200" :model="form">
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item label="功能开启" prop="enabled">
                         <i-switch v-model="form.enabled" size="large">
                             <span slot="open">开启</span>
@@ -59,7 +59,7 @@
                 </i-col>
             </row>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item label="生成 XML 地图" prop="xml">
                         <i-switch v-model="form.xml" size="large">
                             <span slot="open">开启</span>
@@ -69,7 +69,7 @@
                 </i-col>
             </row>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item label="生成 HTML 地图" prop="html">
                         <i-switch v-model="form.html" size="large">
                             <span slot="open">开启</span>
@@ -79,7 +79,7 @@
                 </i-col>
             </row>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item label="只包含最近的文章" prop="recently">
                         <i-switch v-model="form.recently" size="large">
                             <span slot="open">开启</span>
@@ -89,7 +89,7 @@
                 </i-col>
             </row>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item>
                         <i-button :loading="loading" type="primary" @click.native="submit">
                             <span v-if="!loading">确认提交</span>
