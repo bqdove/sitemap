@@ -2,5 +2,16 @@
 ![Packagist](https://img.shields.io/packagist/v/notadd/sitemap.svg) 
 ![Downloads](https://img.shields.io/packagist/dt/notadd/sitemap.svg)
 
-# sitemap
+# Sitemap
 网站sitemap生成插件
+
+## 安装
+
+安装前，请确保 **[Notadd](https://github.com/notadd/notadd)** 已经完成安装。
+
+```bash
+cd notadd/extensions
+git clone https://github.com/notadd/sitemap.git
+cd content
+composer install --no-dev
+```
