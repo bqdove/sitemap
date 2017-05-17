@@ -2,8 +2,9 @@
 ![Packagist](https://img.shields.io/packagist/v/notadd/sitemap.svg) 
 ![Downloads](https://img.shields.io/packagist/dt/notadd/sitemap.svg)
 
-# Sitemap
-网站sitemap生成插件
+# SiteMap
+
+网站 SiteMap 生成插件
 
 ## 安装
 
