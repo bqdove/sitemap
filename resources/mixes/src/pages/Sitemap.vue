@@ -45,7 +45,7 @@
     };
 </script>
 <template>
-    <card>
+    <card :bordered="false">
         <p slot="title">网站地图</p>
         <i-form :label-width="200" :model="form">
             <row>
