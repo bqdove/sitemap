@@ -9,13 +9,13 @@
 namespace Notadd\Sitemap\Handlers;
 
 use Illuminate\Container\Container;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Passport\Abstracts\Handler;
 use Notadd\Foundation\Setting\Contracts\SettingsRepository;
 
 /**
  * Class GetHandler.
  */
-class GetHandler extends DataHandler
+class GetHandler extends Handler
 {
     /**
      * @var \Notadd\Foundation\Setting\Contracts\SettingsRepository
@@ -25,7 +25,7 @@ class GetHandler extends DataHandler
     /**
      * GetHandler constructor.
      *
-     * @param Container $container
+     * @param Container          $container
      * @param SettingsRepository $settings
      */
     public function __construct(Container $container, SettingsRepository $settings)
@@ -35,18 +35,18 @@ class GetHandler extends DataHandler
     }
 
     /**
-     * Data for handler.
+     * Execute Handler.
      *
-     * @return array
+     * @throws \Exception
      */
-    public function data()
+    protected function execute()
     {
-        return [
-            'cycle' => $this->settings->get('sitemap.cycle', false),
-            'enabled' => $this->settings->get('sitemap.enabled', false),
-            'html' => $this->settings->get('sitemap.html', false),
+        $this->success()->withData([
+            'cycle'    => $this->settings->get('sitemap.cycle', false),
+            'enabled'  => $this->settings->get('sitemap.enabled', false),
+            'html'     => $this->settings->get('sitemap.html', false),
             'recently' => $this->settings->get('sitemap.recently', false),
-            'xml' => $this->settings->get('sitemap.xml', false),
-        ];
+            'xml'      => $this->settings->get('sitemap.xml', false),
+        ])->withMessage('获取网站地图配置成功！');
     }
 }
