@@ -13,7 +13,7 @@
 ```bash
 cd notadd/extensions
 git clone https://github.com/notadd/sitemap.git
-cd content
+cd sitemap
 composer install --no-dev
 ```
 
