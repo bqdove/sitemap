@@ -2,7 +2,7 @@
     "name": "notadd-sitemap",
     "version": "1.0.0",
     "description": "Notadd extension sitemap's administration package.",
-    "author": "twilroad <269044570@qq.com>",
+    "author": "twilroad <heshudong@ibenchu.com>",
     "private": true,
     "scripts": {
         "build": "node build/build.js",

@@ -2,8 +2,8 @@
 /**
  * This file is part of Notadd.
  *
- * @author TwilRoad <269044570@qq.com>
- * @copyright (c) 2017, iBenchu.org
+ * @author TwilRoad <heshudong@ibenchu.com>
+ * @copyright (c) 2017, notadd.com
  * @datetime 2017-02-18 20:33
  */
 namespace Notadd\Sitemap\Handlers;
