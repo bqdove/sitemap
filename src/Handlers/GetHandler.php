@@ -41,7 +41,7 @@ class GetHandler extends Handler
      */
     protected function execute()
     {
-        $this->success()->withData([
+        $this->withCode(200)->withData([
             'cycle'    => $this->settings->get('sitemap.cycle', false),
             'enabled'  => $this->settings->get('sitemap.enabled', false),
             'html'     => $this->settings->get('sitemap.html', false),
