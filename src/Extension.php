@@ -9,10 +9,10 @@
 namespace Notadd\Sitemap;
 
 use Illuminate\Events\Dispatcher;
-use Notadd\Content\Models\Article;
 use Notadd\Foundation\Extension\Abstracts\Extension as AbstractExtension;
 use Notadd\Foundation\Http\Events\RequestHandled;
 use Notadd\Foundation\Setting\Contracts\SettingsRepository;
+use Notadd\Sitemap\Events\SitemapRegister;
 use Notadd\Sitemap\Listeners\CsrfTokenRegister;
 use Notadd\Sitemap\Listeners\RouteRegister;
 
@@ -29,17 +29,9 @@ class Extension extends AbstractExtension
         $this->app->make(Dispatcher::class)->listen(RequestHandled::class, function () {
             if ($this->app->isInstalled()) {
                 $setting = $this->app->make(SettingsRepository::class);
-                if ($setting->get('sitemap.enabled', false) && class_exists(Article::class)) {
-                    if ($setting->get('sitemap.recently', true)) {
-                        $list = (new Article())->newQuery()->orderBy('created_at', 'desc')->take(1000)->get();
-                    } else {
-                        $list = (new Article())->newQuery()->orderBy('created_at', 'desc')->get();
-                    }
+                if ($setting->get('sitemap.enabled', false)) {
                     $sitemap = $this->app->make('sitemap');
-                    $list->each(function (Article $article) use ($sitemap) {
-                        $sitemap->add($this->app->make('url')->to('article/' . $article->getAttribute('id')),
-                            $article->getAttribute('updated_at'), 0.8, 'daily', [], $article->getAttribute('title'));
-                    });
+                    $this->app->make(Dispatcher::class)->fire(new SitemapRegister($this->app, $this->app->make(Dispatcher::class), $sitemap));
                     $setting->get('sitemap.xml', true) && $sitemap->store('xml', 'sitemap');
                     $setting->get('sitemap.html', true) && $sitemap->store('html', 'sitemap');
                 }
