@@ -8,8 +8,6 @@
  */
 namespace Notadd\Sitemap\Events;
 
-use Illuminate\Container\Container;
-use Illuminate\Events\Dispatcher;
 use Notadd\Sitemap\Sitemap;
 
 /**
@@ -18,16 +16,6 @@ use Notadd\Sitemap\Sitemap;
 class SitemapRegister
 {
     /**
-     * @var \Illuminate\Container\Container
-     */
-    protected $container;
-
-    /**
-     * @var \Illuminate\Events\Dispatcher
-     */
-    protected $dispatcher;
-
-    /**
      * @var \Notadd\Sitemap\Sitemap
      */
     protected $sitemap;
@@ -35,14 +23,13 @@ class SitemapRegister
     /**
      * SitemapRegister constructor.
      *
-     * @param \Illuminate\Container\Container $container
-     * @param \Illuminate\Events\Dispatcher   $dispatcher
-     * @param \Notadd\Sitemap\Sitemap         $sitemap
+     * @param \Notadd\Sitemap\Sitemap $sitemap
+     *
+     * @internal param \Illuminate\Container\Container $container
+     * @internal param \Illuminate\Events\Dispatcher $dispatcher
      */
-    public function __construct(Container $container, Dispatcher $dispatcher, Sitemap $sitemap)
+    public function __construct(Sitemap $sitemap)
     {
-        $this->container = $container;
-        $this->dispatcher = $dispatcher;
         $this->sitemap = $sitemap;
     }
 }

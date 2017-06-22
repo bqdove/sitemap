@@ -31,7 +31,7 @@ class Extension extends AbstractExtension
                 $setting = $this->app->make(SettingsRepository::class);
                 if ($setting->get('sitemap.enabled', false)) {
                     $sitemap = $this->app->make('sitemap');
-                    $this->app->make(Dispatcher::class)->fire(new SitemapRegister($this->app, $this->app->make(Dispatcher::class), $sitemap));
+                    $this->app->make(Dispatcher::class)->fire(new SitemapRegister($sitemap));
                     $setting->get('sitemap.xml', true) && $sitemap->store('xml', 'sitemap');
                     $setting->get('sitemap.html', true) && $sitemap->store('html', 'sitemap');
                 }
